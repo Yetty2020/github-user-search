@@ -43,6 +43,9 @@ const UserProfile = ({userName}: userProfileProps) => {
         <UsedLanguages repositories={repositories.nodes}/>
         <PopularRepos repositories={repositories.nodes}/>
         <ForkedRepos repositories={repositories.nodes}/>
+        <UsedLanguages repositories={repositories.nodes}/>
+        <PopularRepos repositories={repositories.nodes}/>
+        <ForkedRepos repositories={repositories.nodes}/>
        </div>)}
       
    
