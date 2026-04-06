@@ -8,7 +8,7 @@ type StatsCardProps = {
 function StatsCard({ title, count }: StatsCardProps) {
   return (
     <Card>
-      <div className='flex flex-row justify-between items-center p-6'>
+      <div className='flex flex-col gap-5 items-start p-6'>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{count}</CardDescription>
       </div>
