@@ -1,4 +1,5 @@
 import { type Repository } from '@/types';
+import { Card } from '../ui/card';
 
 
 
@@ -34,8 +35,12 @@ const PopularRepos = ({ repositories }: { repositories: Repository[] }) => {
   //to get the percentage of each starred repo for the bar weight
   const starPercent = popularRepos.map((perc) =>{
     return { repo: perc.repo, 
-      stars: perc.stars,
-      percentage: ((perc.stars)/starMax * 100).toFixed(1)
+     
+      percentage: ((perc.stars)/starMax * 100).toFixed(1),
+
+      //to get the count in k if its in thousands, else return the acutual count
+      formattedStars: perc.stars >=1000 ? (perc.stars / 1000).toFixed(1) + "k" : perc.stars
+     
 
     }
   })
@@ -44,6 +49,7 @@ const PopularRepos = ({ repositories }: { repositories: Repository[] }) => {
 
   
   return (
+    <Card className='w-full p-5'>
     <div>
       <h2 className='text-2xl font-semibold text-center mb-4'>Popular Repos</h2>
 
@@ -55,10 +61,13 @@ const PopularRepos = ({ repositories }: { repositories: Repository[] }) => {
           // to reduce the opacity of the background 
   const fadeOpacity = 1 - index * 0.2
   return (
-    <div key={repo.repo} className='flex items-center space-y-2 '>
-      <span>{repo.repo}</span>
-      <div style={{width: isAnimated ? `${repo.percentage}%` : "0%" , backgroundColor: "#3178c6", opacity: fadeOpacity }} className='h-4 rounded-full transition-all duration-1000 ease-out'></div>
-      <span>{repo.stars}</span>
+    
+    <div key={repo.repo} className='grid grid-cols-[70px_1fr_50px] items-center gap-4   '>
+      <span className='truncate'>{repo.repo}</span>
+      <div className='relative bg-[#8b949e]/30 rounded-full overflow-hidden'>
+      <div style={{width: isAnimated ? `${repo.percentage}%` : "0%" , backgroundColor: "#0a5c2bff", opacity: fadeOpacity }} className='h-3 rounded-full transition-all duration-1000 ease-out'></div>
+      </div>
+      <span>{repo.formattedStars}</span>
     </div>
   )
 
@@ -66,6 +75,7 @@ const PopularRepos = ({ repositories }: { repositories: Repository[] }) => {
         })
         }</div>
     </div>
+    </Card>
   );
 };
 

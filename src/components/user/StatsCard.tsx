@@ -8,9 +8,10 @@ type StatsCardProps = {
 function StatsCard({ title, count }: StatsCardProps) {
   return (
     <Card>
-      <div className='flex flex-col gap-5 items-start p-6'>
+      <div className='flex flex-col gap-5 items-start px-5 py-1'>
+         <CardDescription className='font-bold text-2xl'>{count}</CardDescription>
         <CardTitle>{title}</CardTitle>
-        <CardDescription>{count}</CardDescription>
+       
       </div>
     </Card>
   );

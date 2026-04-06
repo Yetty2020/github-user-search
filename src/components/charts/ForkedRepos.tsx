@@ -2,6 +2,7 @@ import { type Repository } from '@/types';
 
 import { calculateMostForkedRepos } from '@/utils';
 import { useEffect, useState } from 'react';
+import { Card } from '../ui/card';
 
 const ForkedRepos = ({ repositories }: { repositories: Repository[] }) => {
 
@@ -29,7 +30,8 @@ const ForkedRepos = ({ repositories }: { repositories: Repository[] }) => {
     return {
       repo: perct.repo,
       percentage: ((perct.count)/forkedMax * 100).toFixed(1),
-      count: perct.count
+      //to get the count in k if its in thousands, else return the acutual count
+      formattedCount: perct.count >=1000 ? (perct.count / 1000).toFixed(1) + "k" : perct.count
     }
 
   })
@@ -37,6 +39,7 @@ const ForkedRepos = ({ repositories }: { repositories: Repository[] }) => {
   console.log(forkedPercent)
 
   return (
+    <Card className='w-full p-4'>
     <div>
 
       <h2 className='text-2xl font-semibold text-center mb-4'>Forked Repos</h2>
@@ -46,10 +49,14 @@ const ForkedRepos = ({ repositories }: { repositories: Repository[] }) => {
            // to reduce the opacity of the background 
   const fadeOpacity = 1 - index * 0.2
           return(
-            <div key={repo.repo} className='flex items-center space-y-2 '>
-      <span>{repo.repo}</span>
-      <div style={{width: isAnimated ? `${repo.percentage}%` : "0%" , backgroundColor: "#3178c6", opacity: fadeOpacity }} className='h-4 rounded-full transition-all duration-1000 ease-out'></div>
-      <span>{repo.count}</span>
+            <div key={repo.repo} className='grid grid-cols-[70px_1fr_50px] items-center gap-4  '>
+      <span className='truncate'>{repo.repo}</span>
+      <div className='relative bg-[#8b949e]/30 rounded-full overflow-hidden'>
+        <div style={{width: isAnimated ? `${repo.percentage}%` : "0%" , backgroundColor: "#3178c6", opacity: fadeOpacity }} className='h-3 rounded-full transition-all duration-1000 ease-out   '></div>
+
+      </div>
+      
+      <span>{repo.formattedCount}</span>
     </div>
            
           )
@@ -58,6 +65,7 @@ const ForkedRepos = ({ repositories }: { repositories: Repository[] }) => {
       }
       
     </div>
+    </Card>
   );
 };
 

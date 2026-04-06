@@ -11,19 +11,29 @@ type UserCardProps = {
     name: string;
     bio: string;
     url: string;
+    user: string;
+    following: string;
+    followers: string;
 }
 
-const UserCard = ({avatarUrl, name, bio, url}: UserCardProps) => {
+const UserCard = ({avatarUrl, name, bio, url, user, followers, following }: UserCardProps) => {
   return (
-    <Card className='w-full lg:w-1/2 mb-8'>
-        <CardHeader className='flex-row gap-x-8 items-center'>
-            <img src={avatarUrl} alt={name} className='w-36 g-3 rounded object-cover'/>
-            <div>
-                <CardTitle>{name || "Coding Addict"}</CardTitle>
-                <CardDescription>{bio ||"This user has no bio"}</CardDescription>
-                <Button asChild size='sm' className='w-1/2 mt-2'>
+    <Card className='w-full border-none lg:min-h-screen'>
+        <CardHeader className='flex flex-row lg:flex-col gap-x-8 '>
+            <img src={avatarUrl} alt={name} className='w-[80%] g-3 rounded-full object-cover'/>
+            <div className='flex lg:flex-col gap-3'>
+                <CardTitle className='lg:text-3xl'>{name || "Coding Addict"}</CardTitle>
+                <CardDescription className='lg:text-lg '>@{user}</CardDescription>
+                <CardDescription className='lg:text-lg '>{bio ||"This user has no bio"}</CardDescription>
+                <Button asChild size='sm' className='lg:w-full mt-2'>
                     <a href={url} target='_blank' rel='noreferrer'>Follow</a>
                 </Button>
+                <div className='flex justify-between'>
+                  <CardDescription> <span className='font-bold text-lg'>{following}</span>{""} <span className=''>following</span></CardDescription>
+                <CardDescription><span className='font-bold text-lg'>{followers}</span> {""} <span>followers</span></CardDescription>
+                </div>
+                
+
             </div>
         </CardHeader>
     </Card>

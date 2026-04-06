@@ -2,6 +2,7 @@
 import {type Repository} from '@/types'
 import {calculatePopularLanguages} from "@/utils"
 import { useEffect, useState } from 'react';
+import { Card } from '../ui/card';
 
 //to declare the color mapping
   const colorMap: { [key: string]: string } = {
@@ -55,15 +56,16 @@ function UsedLanguagess({repositories}: {repositories: Repository[]}) {
     const langPercent = popularLanguages.map((lang)=>{
         return {
             lang: lang.language,
-            percent: ((lang.count / total) * 100).toFixed(1),
+            percent: ((lang.count / total) * 100).toFixed(0),
             
         }
 
     })
     console.log(langPercent)
   return (
-    <div>
-      <h2 className='text-2xl font-semibold text-center mb-4'>Used Languages</h2>
+    <Card className='p-4'>
+      <h2 className='text-2xl font-semibold text-center '>Used Languages</h2>
+      <div className='flex flex-col gap-5'>
         <div className='overflow-hidden h-3 rounded-full bg-slate-800 flex transition-all duration-700 ease-out'>
             {langPercent.map((item, index) => {
                 return <div key={index} style={{
@@ -75,15 +77,21 @@ function UsedLanguagess({repositories}: {repositories: Repository[]}) {
 
             })}
         </div>
-        <div className='flex flex-wrap justify-between'>{langPercent.map((item) =>{
-            return <div key={item.lang} className='flex gap-3'>
-                <div style={{backgroundColor: getLangColor(item.lang)}} className='h-5 w-5 rounded-full'></div>
-                <span>{item.lang}</span>
+        <div className='flex flex-wrap gap-4 items-center'>{langPercent.map((item) =>{
+            return <div key={item.lang} className='flex gap-1 items-center'>
+                <div style={{backgroundColor: getLangColor(item.lang)}} className='h-3 w-3 rounded-full'></div>
+                <div className='flex items-center gap-1'>
+                  <span>{item.lang}</span>
                 <span>{item.percent}%</span>
+
+                </div>
+                
             </div>
             
         })}</div>
-    </div>
+      </div>
+        
+    </Card>
   )
 }
 
