@@ -6,6 +6,7 @@ import StatsContainer from './StatsContainer';
 import ForkedRepos from '../charts/ForkedRepos';
 import PopularRepos from '../charts/PopularRepos';
 import UsedLanguages from '../charts/UsedLanguages';
+import UsedLanguagess from '../charts/UsedLanguagess';
 
 type userProfileProps = {
     userName: string
@@ -43,6 +44,7 @@ const UserProfile = ({userName}: userProfileProps) => {
         <UsedLanguages repositories={repositories.nodes}/>
         <PopularRepos repositories={repositories.nodes}/>
         <ForkedRepos repositories={repositories.nodes}/>
+        <UsedLanguagess repositories={repositories.nodes}/>
         
        </div>)}
       
