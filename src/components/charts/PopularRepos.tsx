@@ -1,59 +1,70 @@
 import { type Repository } from '@/types';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-import type { ChartConfig } from '@/components/ui/chart';
-import {
- 
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from '@/components/ui/chart';
+
+
+
 import { calculateMostStarredRepos } from '@/utils';
+import { useEffect, useState } from 'react';
 
 const PopularRepos = ({ repositories }: { repositories: Repository[] }) => {
+
+  const [isAnimated, setIsAnimated] = useState(false)
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setIsAnimated(true)
+
+    })
+  }, [repositories])
   // Calculate most starred repositories and return array of {repo: string, stars: number}
   const popularRepos = calculateMostStarredRepos(repositories);
+  console.log(popularRepos)
 
-  // Configuration for the chart's styling and labels
-  const chartConfig = {
-    repo: {
-      label: 'Repository',
-      color: '#e11c47', // Red color for the bars
-    },
-  } satisfies ChartConfig;
+  //to get an array of just the starred numers
+  const starCounts = popularRepos.map((repo) => repo.stars)
 
+  //to find the highest number in the array
+  const starMax = Math.max(...starCounts)
+  console.log(starMax)
+
+  
+
+
+
+
+  //to get the percentage of each starred repo for the bar weight
+  const starPercent = popularRepos.map((perc) =>{
+    return { repo: perc.repo, 
+      stars: perc.stars,
+      percentage: ((perc.stars)/starMax * 100).toFixed(1)
+
+    }
+  })
+
+  console.log(starPercent)
+
+  
   return (
     <div>
       <h2 className='text-2xl font-semibold text-center mb-4'>Popular Repos</h2>
-      {/* ChartContainer: Custom wrapper component that handles responsive sizing and theme */}
-      <ChartContainer config={chartConfig} className='h-100 w-full'>
-        {/* BarChart: Main chart component from recharts */}
-        {/* accessibilityLayer adds ARIA labels for better screen reader support */}
-        <BarChart accessibilityLayer data={popularRepos}>
-          {/* CartesianGrid: Adds horizontal guide lines (vertical disabled) */}
-          <CartesianGrid vertical={false} />
 
-          {/* XAxis: Horizontal axis showing repository names */}
-          {/* tickFormatter truncates long repository names to 10 characters */}
-          <XAxis
-            dataKey='repo'
-            tickLine={false}
-            tickMargin={10}
-            tickFormatter={(value) => value.slice(0, 10)}
-          />
+      
+      
+   
+      <div>{
+       starPercent.map((repo, index)=>{
+          // to reduce the opacity of the background 
+  const fadeOpacity = 1 - index * 0.2
+  return (
+    <div key={repo.repo} className='flex items-center space-y-2 '>
+      <span>{repo.repo}</span>
+      <div style={{width: isAnimated ? `${repo.percentage}%` : "0%" , backgroundColor: "#3178c6", opacity: fadeOpacity }} className='h-4 rounded-full transition-all duration-1000 ease-out'></div>
+      <span>{repo.stars}</span>
+    </div>
+  )
 
-          {/* YAxis: Vertical axis showing star counts */}
-          <YAxis dataKey='stars' />
-
-          {/* ChartTooltip: Custom tooltip component that appears on hover */}
-          {/* ChartTooltipContent: Renders the actual content inside the tooltip */}
-          <ChartTooltip content={<ChartTooltipContent />} />
-
-          {/* Bar: The actual bar elements of the chart */}
-          {/* fill uses CSS variable for consistent theming */}
-          {/* radius adds rounded corners to the bars */}
-          <Bar dataKey='stars' fill='var(--color-repo)' radius={4} />
-        </BarChart>
-      </ChartContainer>
+         
+        })
+        }</div>
     </div>
   );
 };
