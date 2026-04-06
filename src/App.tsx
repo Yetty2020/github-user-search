@@ -7,7 +7,7 @@ import UserProfile from "./components/user/UserProfile"
 const App = () => {
   const [userName, setUserName]  = useState('antfu')
   return (
-    <main className="mx-auto max-w-6xl px-8 py-20">
+    <main className="mx-auto  ">
       <SearchForm userName={userName} setUserName={setUserName}/>
       {/* <TrendingUsers/> */}
 

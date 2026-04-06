@@ -58,6 +58,9 @@ export const calculatePopularLanguages = (
     return [];
   }
 
+
+  
+
   // Initialize a map to track how many times each language appears
   // Example: { "JavaScript": 5, "Python": 3, "TypeScript": 2 }
   const languageMap: { [key: string]: number } = {};
