@@ -63,6 +63,7 @@ function UsedLanguagess({repositories}: {repositories: Repository[]}) {
     console.log(langPercent)
   return (
     <div>
+      <h2 className='text-2xl font-semibold text-center mb-4'>Used Languages</h2>
         <div className='overflow-hidden h-3 rounded-full bg-slate-800 flex transition-all duration-700 ease-out'>
             {langPercent.map((item, index) => {
                 return <div key={index} style={{
