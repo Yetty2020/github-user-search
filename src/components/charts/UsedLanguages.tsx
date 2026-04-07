@@ -66,7 +66,7 @@ function UsedLanguagess({repositories}: {repositories: Repository[]}) {
     <Card className='p-4'>
       <h2 className='text-2xl font-semibold text-center '>Used Languages</h2>
       <div className='flex flex-col gap-5'>
-        <div className='overflow-hidden h-3 rounded-full bg-slate-800 flex transition-all duration-700 ease-out'>
+        <div className='overflow-hidden h-3 rounded-full bg-slate-800 flex transition-all duration-1000 ease-out'>
             {langPercent.map((item, index) => {
                 return <div key={index} style={{
         // The "Switch" Logic: 

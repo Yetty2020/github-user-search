@@ -6,6 +6,7 @@ import StatsContainer from './StatsContainer';
 import ForkedRepos from '../charts/ForkedRepos';
 import PopularRepos from '../charts/PopularRepos';
 import UsedLanguages from '../charts/UsedLanguages';
+import Loading from './Loading';
 
 
 type userProfileProps = {
@@ -21,7 +22,7 @@ const UserProfile = ({userName}: userProfileProps) => {
         },
     })
 
-    if (loading) return <div>Loading...</div>
+    if (loading) return <Loading />
     if (error) return <h2 className='text-xl'>{error.message}</h2>
     if (!data) return <h2 className='text-xl'>User Not Found</h2>
 
@@ -37,7 +38,7 @@ const UserProfile = ({userName}: userProfileProps) => {
     gists,
   } = data.user;
   return (
-    <div className='flex flex-col lg:flex-row gap-5 items-start mx-auto lg:max-w-[80%]'>
+    <div className='flex flex-col lg:flex-row gap-5 items-start mx-auto lg:max-w-[80%] lg:mt-6'>
       <div className=' w-full lg:w-[30%]'>
         <UserCard avatarUrl={avatarUrl} bio={bio} name={name} url={url} user={userName} followers={followers.totalCount} following={following.totalCount}/>
       </div>
