@@ -24,12 +24,19 @@ const SearchForm = ({userName, setUserName}: SearchFormProps) => {
 
         setUserName(text)
     }
-  return (
-    <form onSubmit={handleSearch} className='flex items-center gap-x-2 lg:w-1/3 mb-8'>
+    return (
+        <div className='flex items-center justify-between w-full lg:w-2/3 p-4'>
+
+        <h1 className='font-bold text-md lg:text-4xl'>Git Explorer</h1>
+
+        <form onSubmit={handleSearch} className='flex items-center gap-x-2 w-full lg:w-2/3 mb-4 lg:mb-0'>
         <Label htmlFor='search' className='sr-only'>Search</Label>
         <Input type='text' id='search' value={text} onChange={(e) => setText(e.target.value)} placeholder='Search Github User...' className='flex-grow bg-background'/>
         <Button type='submit'>Search</Button>
     </form>
+        
+    </div>
+    
   )
 }
 

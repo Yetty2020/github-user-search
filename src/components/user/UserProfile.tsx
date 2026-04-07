@@ -37,8 +37,8 @@ const UserProfile = ({userName}: userProfileProps) => {
     gists,
   } = data.user;
   return (
-    <div className='flex flex-col lg:flex-row gap-5 items-start'>
-      <div className='lg:w-[30%]'>
+    <div className='flex flex-col lg:flex-row gap-5 items-start mx-auto lg:max-w-[80%]'>
+      <div className=' w-full lg:w-[30%]'>
         <UserCard avatarUrl={avatarUrl} bio={bio} name={name} url={url} user={userName} followers={followers.totalCount} following={following.totalCount}/>
       </div>
         
