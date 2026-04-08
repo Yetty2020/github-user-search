@@ -49,10 +49,12 @@ const PopularRepos = ({ repositories }: { repositories: Repository[] }) => {
 
   
   return (
-    <Card className='w-full p-5'>
+    <Card className='w-full p-5 bg-[#161b22] text-[#e6edf3] border-[#30363d]'>
     <div>
-      <h2 className='text-2xl font-semibold text-center mb-4'>Popular Repos</h2>
-
+      <h2 className='text-lg font-medium  flex items-center gap-2 mb-4 '> 
+        <div className='h-5 w-1 bg-[#2ea043] rounded-md'></div>
+        <span>Popular Repos</span>
+      </h2>
       
       
    
@@ -63,11 +65,11 @@ const PopularRepos = ({ repositories }: { repositories: Repository[] }) => {
   return (
     
     <div key={repo.repo} className='grid grid-cols-[70px_1fr_50px] items-center gap-4   '>
-      <span className='truncate'>{repo.repo}</span>
+      <span className='truncate text-[#8b949e]'>{repo.repo}</span>
       <div className='relative bg-[#8b949e]/30 rounded-full overflow-hidden'>
-      <div style={{width: isAnimated ? `${repo.percentage}%` : "0%" , backgroundColor: "#0a5c2bff", opacity: fadeOpacity }} className='h-3 rounded-full transition-all duration-1000 ease-out'></div>
+      <div style={{width: isAnimated ? `${repo.percentage}%` : "0%" , backgroundColor: "#2ea043", opacity: fadeOpacity }} className='h-3 rounded-full transition-all duration-1000 ease-out'></div>
       </div>
-      <span>{repo.formattedStars}</span>
+      <span className='text-[#8b949e]'>{repo.formattedStars}</span>
     </div>
   )
 

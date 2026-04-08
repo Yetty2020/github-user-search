@@ -39,10 +39,13 @@ const ForkedRepos = ({ repositories }: { repositories: Repository[] }) => {
   console.log(forkedPercent)
 
   return (
-    <Card className='w-full p-4'>
+    <Card className='w-full p-4 bg-[#161b22] text-[#e6edf3] border-[#30363d]'>
     <div>
 
-      <h2 className='text-2xl font-semibold text-center mb-4'>Forked Repos</h2>
+      <h2 className='text-lg font-medium  flex items-center gap-2 mb-4 '> 
+        <div className='h-5 w-1 bg-[#1f6feb] rounded-md'></div>
+        <span>Forked Repos</span>
+      </h2>
       {
         forkedPercent.map((repo, index)=>{
 
@@ -50,13 +53,13 @@ const ForkedRepos = ({ repositories }: { repositories: Repository[] }) => {
   const fadeOpacity = 1 - index * 0.2
           return(
             <div key={repo.repo} className='grid grid-cols-[70px_1fr_50px] items-center gap-4  '>
-      <span className='truncate'>{repo.repo}</span>
+      <span className='truncate text-[#8b949e]'>{repo.repo}</span>
       <div className='relative bg-[#8b949e]/30 rounded-full overflow-hidden'>
-        <div style={{width: isAnimated ? `${repo.percentage}%` : "0%" , backgroundColor: "#3178c6", opacity: fadeOpacity }} className='h-3 rounded-full transition-all duration-1000 ease-out   '></div>
+        <div style={{width: isAnimated ? `${repo.percentage}%` : "0%" , backgroundColor: "#1f6feb", opacity: fadeOpacity }} className='h-3 rounded-full transition-all duration-1000 ease-out   '></div>
 
       </div>
       
-      <span>{repo.formattedCount}</span>
+      <span className='text-[#8b949e]'>{repo.formattedCount}</span>
     </div>
            
           )

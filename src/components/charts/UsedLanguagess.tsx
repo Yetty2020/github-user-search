@@ -2,7 +2,6 @@
 import {type Repository} from '@/types'
 import {calculatePopularLanguages} from "@/utils"
 import { useEffect, useState } from 'react';
-import { Card } from '../ui/card';
 
 //to declare the color mapping
   const colorMap: { [key: string]: string } = {
@@ -56,20 +55,15 @@ function UsedLanguagess({repositories}: {repositories: Repository[]}) {
     const langPercent = popularLanguages.map((lang)=>{
         return {
             lang: lang.language,
-            percent: ((lang.count / total) * 100).toFixed(0),
+            percent: ((lang.count / total) * 100).toFixed(1),
             
         }
 
     })
     console.log(langPercent)
   return (
-    <Card className='p-4 bg-[#161b22] text-[#e6edf3] border-[#30363d]'>
-      <h2 className='text-lg font-medium  flex items-center gap-2 '> 
-        <div className='h-5 w-1 bg-[#f78166] rounded-md'></div>
-        <span>Languages Used</span>
-      </h2>
-      <div className='flex flex-col gap-5'>
-        <div className='overflow-hidden h-3 rounded-full bg-slate-800 flex transition-all duration-1000 ease-out'>
+    <div>
+        <div className='overflow-hidden h-3 rounded-full bg-slate-800 flex transition-all duration-700 ease-out'>
             {langPercent.map((item, index) => {
                 return <div key={index} style={{
         // The "Switch" Logic: 
@@ -80,21 +74,15 @@ function UsedLanguagess({repositories}: {repositories: Repository[]}) {
 
             })}
         </div>
-        <div className='flex flex-wrap gap-4 items-center'>{langPercent.map((item) =>{
-            return <div key={item.lang} className='flex gap-1 items-center'>
-                <div style={{backgroundColor: getLangColor(item.lang)}} className='h-3 w-3 rounded-full'></div>
-                <div className='flex items-center gap-1'>
-                  <span>{item.lang}</span>
-                <span className='text-[#8b949e]'>{item.percent}%</span>
-
-                </div>
-                
+        <div className='flex flex-wrap justify-between'>{langPercent.map((item) =>{
+            return <div key={item.lang} className='flex gap-3'>
+                <div style={{backgroundColor: getLangColor(item.lang)}} className='h-5 w-5 rounded-full'></div>
+                <span>{item.lang}</span>
+                <span>{item.percent}%</span>
             </div>
             
         })}</div>
-      </div>
-        
-    </Card>
+    </div>
   )
 }
 
