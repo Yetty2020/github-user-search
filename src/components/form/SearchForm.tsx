@@ -34,7 +34,7 @@ const SearchForm = ({userName, setUserName}: SearchFormProps) => {
         <form onSubmit={handleSearch} className='flex items-center gap-x-2 w-2/3 lg:w-2/3 mb-4 lg:mb-0 bg-[#0d1117] p-2 rounded-lg border-[#30363d]'>
         <Label htmlFor='search' className='sr-only'>Search</Label>
 
-        <Input type='text' id='search' value={text} onChange={(e) => setText(e.target.value)} placeholder='Search Github User...' className='flex-grow bg-[#0d1117] border-none text-[#8b949e]'/>
+        <Input type='text' id='search' value={text} onChange={(e) => setText(e.target.value)} placeholder='Search Github User...' className='grow bg-[#0d1117] border-none text-[#8b949e]'/>
         <Button type='submit' className='bg-[#161b22] text-[#8b949e] border-[#30363d] cursor-pointer'>Search</Button>
     </form>
         

@@ -3,7 +3,7 @@ import { Skeleton } from "../ui/skeleton"
 
 function Loading() {
   return (
-    <div className="flex flex-col lg:flex-row gap-5 items-start mx-auto w-full lg:max-w-[80%] mt-6 bg-[#0d1117] h-screen">
+    <div className="flex flex-col lg:flex-row gap-5 items-start mx-auto w-full lg:max-w-[80%] mt-6 bg-[#0d1117] h-screen lg:max-h-screen">
         <div className="w-full lg:w-[30%] p-4 ">
            <Card className="w-full lg:h-screen bg-[#0d1117] border-[#30363d] ">
       <CardHeader >
@@ -45,7 +45,7 @@ function Loading() {
         
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             <Skeleton className="h-48 w-full aspect-video bg-[#30363d]" />
             <Skeleton className="h-48 w-full aspect-video bg-[#30363d]" />
 

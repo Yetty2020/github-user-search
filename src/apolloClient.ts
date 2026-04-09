@@ -9,31 +9,43 @@ import {
   HttpLink,
   ApolloLink,
 } from '@apollo/client';
+//import { CombinedGraphQLErrors } from "@apollo/client/errors";
+
 
 // Error handling middleware for Apollo Client
 // Provides detailed error information for both GraphQL and network errors
-import { onError } from '@apollo/client/link/error';
+//import { onError } from '@apollo/client/link/error';
 
 // GitHub GraphQL API endpoint
-const GITHUB_GRAPHQL_API = 'https://api.github.com/graphql';
+ const GITHUB_GRAPHQL_API = 'https://api.github.com/graphql';
+
+// const isGraphQLError = CombinedGraphQLErrors.is(error);
+
+// if (isGraphQLError) {
+//   error.errors.forEach((graphQLError) => {
+//     console.log(graphQLError.message);
+//     console.log(graphQLError.path);
+//     console.log(graphQLError.locations);
+//   });
+// }
 
 // Configure error handling middleware
 // This will intercept and log any GraphQL or network errors
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  // Handle GraphQL-specific errors (e.g., validation, resolver errors)
-  if (graphQLErrors) {
-    graphQLErrors.forEach(({ message, locations, path }) => {
-      console.error(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      );
-    });
-  }
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   // Handle GraphQL-specific errors (e.g., validation, resolver errors)
+//   if (graphQLErrors) {
+//     graphQLErrors.forEach(({ message, locations, path }) => {
+//       console.error(
+//         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+//       );
+//     });
+//   }
 
-  // Handle network-level errors (e.g., connection issues)
-  if (networkError) {
-    console.error(`[Network error]: ${networkError}`);
-  }
-});
+//   // Handle network-level errors (e.g., connection issues)
+//   if (networkError) {
+//     console.error(`[Network error]: ${networkError}`);
+//   }
+// });
 
 // Configure HTTP connection to GitHub's GraphQL API
 // Including authentication token from environment variables
@@ -46,7 +58,7 @@ const httpLink = new HttpLink({
 
 // Create the Apollo Link chain
 // Order matters: errorLink will run before httpLink
-const link = ApolloLink.from([errorLink, httpLink]);
+const link = ApolloLink.from([ httpLink]);
 
 // Initialize Apollo Client with:
 // - Configured link chain for network requests
@@ -58,5 +70,3 @@ const client = new ApolloClient({
 
 export default client;
 
-
-// change code back to what was previously there
